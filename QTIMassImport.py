@@ -2,7 +2,8 @@ import requests
 import zipfile
 import os
 import json
-
+from tkinter import Tk
+from tkinter.filedialog import askopenfilename
 
 class userInput():
     def userRestToken(self):
@@ -19,7 +20,9 @@ class userInput():
         return canvasCourseID
 
     def pathToZip(self):
-        with zipfile.ZipFile("QuizFiles.zip", "r") as z:
+        Tk().withdraw()
+        filePath = askopenfilename(filetypes=[("Zip files", "*.zip")])
+        with zipfile.ZipFile(filePath, "r") as z:
             print("extracting...")
             if os.path.exists("extractedFiles") == False:
                 os.makedirs("extractedFiles")
